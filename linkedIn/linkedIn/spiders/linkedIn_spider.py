@@ -1,11 +1,11 @@
-from scrapy.spider import BaseSpider
+from scrapy.spiders import CrawlSpider
 from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request
-from linkedIn.items import linkedInItem
+from ..items import linkedInItem
 
 import sys
 import random
-from countries import checkLocation
+from .countries import checkLocation
 
 
 randomSampling = True
@@ -17,7 +17,7 @@ def striplist(l):
     l = [x.strip().replace('\t',"") for x in l]
     return [x for x in l if x != u'']
 
-class linkedInSpider(BaseSpider):
+class linkedInSpider(CrawlSpider):
     name = "linkedin.com"
     allowed_domains = ["linkedin.com"]
     start_urls = ["http://www.linkedin.com/directory/people-%s" % s
